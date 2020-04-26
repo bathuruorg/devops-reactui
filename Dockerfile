@@ -7,9 +7,11 @@ WORKDIR /app
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
-# install app dependencies
+# Copies package.json and package-lock.json to Docker environment
 COPY package.json ./
 COPY package-lock.json ./
+
+# Installs all node packages
 RUN npm install --silent
 
 # add app
