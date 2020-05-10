@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-const INSTRUCTOR = 'in28minutes'
 const COURSE_API_URL =  'http://bathuru.xyz'
 const INSTRUCTOR_API_URL = `${COURSE_API_URL}/api/v1`
 
