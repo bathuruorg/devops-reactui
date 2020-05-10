@@ -5,7 +5,6 @@ const COURSE_API_URL =  'http://bathuru.xyz'
 const INSTRUCTOR_API_URL = `${COURSE_API_URL}/instructors/${INSTRUCTOR}`
 
 class CourseDataService {
-
     retrieveAllCourses(name) {
         //console.log('executed service')
         return axios.get(`${INSTRUCTOR_API_URL}/courses`);
