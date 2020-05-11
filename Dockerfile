@@ -1,11 +1,8 @@
 # pull official base image
-FROM node:latest as build-stage 
+FROM node:alpine as build-stage 
 
 # set working directory
 WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
 
 # Copying package.json and package-lock.json file from local root directory
 # This file contains all dependencies that our app requires
@@ -17,8 +14,16 @@ RUN npm install --silent
 # add app
 COPY . /app
 
-# Uses port which is used by the actual application
-EXPOSE 3000
+RUN npm run build 
 
-# start app
-CMD ["npm", "start"]
+# base image
+FROM nginx:alpine
+
+# copy artifact build from the 'build environment'
+COPY --from=build-stage /app/build /usr/share/nginx/html
+
+# expose port 80
+EXPOSE 80
+
+# run nginx
+CMD ["nginx", "-g", "daemon off;"]
