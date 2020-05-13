@@ -14,7 +14,7 @@ RUN npm install --silent
 # add app
 COPY . /app
 
-RUN npm run build 
+RUN npm run build --prod
 
 # base image
 FROM nginx:alpine
